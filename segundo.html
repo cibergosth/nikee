@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finaliza tu compra de Nike - Réplica Exacta</title>
+  <style>
+    /* =========================================
+       SISTEMA DE ESPACIADO NIKE (1 unidad = 4px)
+       ========================================= */
+    .mt-0 { margin-top: 0px !important; }
+    .mt-3 { margin-top: 12px !important; }
+    .mt-4 { margin-top: 16px !important; }
+    .mt-5 { margin-top: 20px !important; }
+    .mt-6 { margin-top: 24px !important; }
+
+    .mb-0 { margin-bottom: 0px !important; }
+    .mb-1 { margin-bottom: 4px !important; }
+    .mb-2 { margin-bottom: 8px !important; }
+    .mb-3 { margin-bottom: 12px !important; }
+    .mb-4 { margin-bottom: 16px !important; }
+    .mb-6 { margin-bottom: 24px !important; }
+
+    .pt-4 { padding-top: 16px !important; }
+    .pb-2 { padding-bottom: 8px !important; }
+    .pv-4 { padding-top: 16px !important; padding-bottom: 16px !important; }
+
+    /* =========================================
+       ESTILOS GENERALES
+       ========================================= */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #111;
+      background-color: #fff;
+    }
+    h1, h2, h3, p { margin: 0; }
+    a { color: #111; text-decoration: none; }
+    a:hover { color: #757575; }
+
+    /* =========================================
+       ENCABEZADO (HEADER)
+       ========================================= */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      border-bottom: 1px solid #e5e5e5;
+    }
+    .header__right-panel { display: flex; align-items: center; gap: 24px; font-size: 0.875rem; }
+    .header__profile-button { background: transparent; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; }
+
+    /* =========================================
+       CONTENEDOR PRINCIPAL
+       ========================================= */
+    .checkout-container {
+      display: flex;
+      max-width: 1000px;
+      margin: 40px auto;
+      gap: 60px;
+      padding: 0;
+    }
+    .col-left { flex: 2; }
+    .col-right { flex: 1; }
+
+    hr.nike-hr {
+      background-color: #e5e5e5;
+      height: 1px;
+      border: none;
+      width: 100%;
+    }
+
+    /* =========================================
+       ELEMENTOS DE FORMULARIO
+       ========================================= */
+    .title-text { font-size: 1.5rem; font-weight: 500; }
+    
+    .free-shipping-message { margin-bottom: 24px; }
+    .free-shipping-text { font-size: 0.875rem; color: #111; margin-bottom: 8px; }
+    .free-shipping-bar-top { height: 6px; background-color: #007d48; border-radius: 4px; width: 100%; }
+
+    /* Opciones de entrega */
+    .delivery-options { display: flex; gap: 16px; }
+    .delivery-option {
+      flex: 1;
+      border: 1px solid #cacacb;
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 500;
+      background-color: transparent;
+      font-size: 1rem;
+    }
+    .delivery-option.active { border: 2px solid #111; }
+    .delivery-option img { width: 24px; height: 24px; margin-right: 12px; }
+
+    /* Inputs flotantes */
+    .form-floating { position: relative; margin-bottom: 16px; }
+    .form-floating input, .form-floating select {
+      width: 100%;
+      padding: 24px 16px 8px 16px;
+      font-size: 1rem;
+      border: 1px solid #cacacb;
+      border-radius: 4px;
+      box-sizing: border-box;
+      outline: none;
+      background-color: #fff;
+      font-family: inherit;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+    .form-floating input:focus, .form-floating select:focus { border-color: #111; }
+    
+    .form-floating select {
+      background-image: url("https://assets.eshopworld.com/nikeassets/images/dropdown/show.svg");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      cursor: pointer;
+      padding-right: 40px;
+    }
+
+    .form-floating label {
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      color: #757575;
+      font-size: 1rem;
+      transition: all 0.2s ease-out;
+      pointer-events: none;
+    }
+    
+    .form-floating input:focus + label,
+    .form-floating input:not(:placeholder-shown) + label { top: 6px; font-size: 0.75rem; }
+
+    /* Estilo para el centrado perfecto de Estado y País sin texto doble */
+    #estado, #pais {
+      padding: 16px !important;
+      height: 56px;
+      box-sizing: border-box;
+    }
+    #estado:invalid { color: #757575; }
+    #estado:valid { color: #111; }
+    #estado option { color: #111; }
+
+    .form-row { display: flex; gap: 16px; }
+    .half-width { flex: 1; }
+    
+    /* Separación corregida para textos de ayuda */
+    .form-info { 
+      font-size: 0.75rem; 
+      color: #757575; 
+      margin-top: 8px; /* Incrementamos la separación */
+      margin-bottom: 16px; 
+      padding-left: 16px;
+    }
+
+    /* Checkbox de Facturación */
+    .checkbox-container {
+      display: flex; align-items: flex-start; gap: 12px; font-size: 1rem; cursor: pointer;
+    }
+    .custom-checkbox {
+       width: 18px; height: 18px; display: inline-block;
+       background: url("https://assets.eshopworld.com/nikeassets/images/check/active.svg") left center no-repeat;
+       flex-shrink: 0; margin-top: 3px;
+    }
+    .checkbox-container input { display: none; }
+
+    /* Panel de Pago y Mensualidades */
+    .payment-subtitle { font-size: 1rem; font-weight: 500; }
+    .security-help { text-align: right; }
+    .security-help a { font-size: 0.75rem; text-decoration: underline; color: #111; }
+    .terms-disclaimer { font-size: 0.75rem; color: #757575; line-height: 1.5; }
+    
+    /* Logos de Tarjeta dentro del input */
+    .input-card-brand-icon {
+        position: absolute; right: 46px; top: 50%; transform: translateY(-50%);
+        width: 32px; height: 20px; background-size: contain; background-repeat: no-repeat; background-position: center; display: none;
+    }
+    .input-card-brand-icon.active { display: block; }
+    .input-card-brand-icon.visa { background-image: url('https://assets.eshopworld.com/nikeassets/images/logos/card_visa_light.png'); }
+    .input-card-brand-icon.mastercard { background-image: url('https://assets.eshopworld.com/nikeassets/images/logos/card_mc_light.png'); }
+
+    /* Estilos del menú de opciones de pago (Installments Panel) */
+    .installments-panel-base { display: none; margin-bottom: 24px; }
+    .installments-row {
+        display: flex; align-items: center; padding: 18px 16px; border: 1px solid #cacacb;
+        margin-top: -1px; cursor: pointer; background-color: #fff; transition: background-color 0.2s;
+    }
+    .installments-row:hover { background-color: #f5f5f5; }
+    .installments-row:first-child { border-top-left-radius: 8px; border-top-right-radius: 8px; }
+    .installments-row:last-child { border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; }
+    
+    .button-radio { margin-right: 16px; }
+    .button-radio input[type="radio"] { 
+        appearance: none; width: 20px; height: 20px; border: 1px solid #111; border-radius: 50%;
+        outline: none; cursor: pointer; position: relative;
+    }
+    .button-radio input[type="radio"]:checked::before {
+        content: ''; position: absolute; top: 4px; left: 4px; width: 10px; height: 10px;
+        background-color: #111; border-radius: 50%;
+    }
+    .installment-text { flex: 1; font-size: 1rem; color: #111; }
+    .installment-price-base { text-align: right; display: flex; flex-direction: column; }
+    .installment-breakdown { font-size: 0.75rem; color: #757575; }
+    .installment-total { font-size: 1rem; color: #111; }
+
+    /* Botón Realizar Pedido */
+    .paynow-container { width: 100%; margin-top: 24px; margin-bottom: 40px; }
+    .btn-submit {
+      width: 100%; padding: 16px 20px; border-radius: 30px; border: none;
+      background-color: #f5f5f5; color: #757575; font-size: 1rem; font-weight: 500; cursor: not-allowed;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .btn-submit:not(:disabled) {
+      background-color: rgb(0, 0, 0);
+      color: #ffffff;
+      cursor: pointer;
+    }
+    .btn-submit:not(:disabled):hover { background-color: #333; }
+
+    /* =========================================
+       RESUMEN DEL PEDIDO (COLUMNA DERECHA)
+       ========================================= */
+    .summary-title { font-size: 1.5rem; font-weight: 500; margin-bottom: 24px; margin-top: 16px; }
+    .summary-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 1rem; }
+    .summary-row.total { font-weight: 500; border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; padding: 16px 0; margin-top: 16px; margin-bottom: 24px; }
+    .free-shipping-text-right { font-size: 0.875rem; color: #111; margin-bottom: 8px; }
+    .free-shipping-bar-right { height: 6px; background-color: #007d48; border-radius: 4px; margin-bottom: 16px; }
+    .product-card { display: flex; gap: 16px; margin-top: 24px; }
+    .product-img { width: 100px; height: 100px; background-color: #f5f5f5; border-radius: 4px; object-fit: cover;}
+    .product-details { font-size: 0.875rem; color: #757575; line-height: 1.5;}
+    .product-title { color: #111; font-weight: 500; }
+
+    /* =========================================
+       FOOTER
+       ========================================= */
+    footer { background-color: #111; color: #fff; padding: 20px 40px; display: flex; justify-content: space-between; font-size: 0.75rem; margin-top: 60px; }
+    footer a { color: #cacacb; margin-left: 16px; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) { .checkout-container { padding: 0 20px; } }
+    @media (max-width: 800px) {
+      .checkout-container { flex-direction: column-reverse; }
+      .col-left, .col-right { width: 100%; }
+      .form-row { flex-direction: column; gap: 0; }
+      .free-shipping-message { display: block; }
+    }
+    @media (min-width: 801px) { .free-shipping-message { display: none; } }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="#" aria-label="Volver a Inicio">
+      <img alt="brand icon" aria-hidden="true" width="86" height="30" loading="eager" class="header-logo" src="https://assets.eshopworld.com/nikeassets/images/logos/swoosh.svg?v=ba5786839b770bbbcd0b464322a09051">
+    </a>
+    <div class="header__right-panel">
+      <span class="header__contact-number">800-062-3550</span>
+      <a target="_blank" rel="noopener noreferrer" class="header__chat-link" href="#" aria-label="Chat">
+        <img alt="chat icon" aria-hidden="true" width="20" height="20" loading="eager" src="https://assets.eshopworld.com/nikeassets/images/chat.svg?v=ba5786839b770bbbcd0b464322a09051">
+      </a>
+      <a class="header__basket-link" href="#" aria-label="Regresar a la bolsa de compra">
+        <img alt="cart icon" aria-hidden="true" height="20" width="20" loading="eager" src="https://assets.eshopworld.com/nikeassets/images/cart.svg?v=ba5786839b770bbbcd0b464322a09051">
+      </a>
+      <button class="header__profile-button" aria-label="Iniciar sesión">
+        <img alt="profile icon" aria-hidden="true" width="18" height="19" loading="eager" src="https://assets.eshopworld.com/nikeassets/images/profile.svg?v=ba5786839b770bbbcd0b464322a09051">
+      </button>
+    </div>
+  </header>
+
+  <main class="checkout-container">
+    
+    <div class="col-left">
+      
+      <div class="free-shipping-message">
+         <div class="free-shipping-text">¡Calificas para envío gratuito!</div>
+         <div class="free-shipping-bar-top"></div>
+      </div>
+
+      <div class="mt-3">
+        <h1 class="title-text mt-4">Datos de entrega</h1>
+      </div>
+      
+      <div class="delivery-options mt-4 mb-2">
+        <button class="delivery-option active mb-4">
+          <img aria-hidden="true" width="24" height="24" alt="delivery icon" src="https://assets.eshopworld.com/nikeassets/images/delivery.svg?v=ba5786839b770bbbcd0b464322a09051">
+          Entrega en domicilio
+        </button>
+      </div>
+
+      <div class="form-floating mb-4">
+        <input type="email" id="email" class="req-input" placeholder=" " required>
+        <label for="email">Correo electrónico *</label>
+      </div>
+      
+      <div class="mt-6">
+        <div class="form-floating mb-4">
+          <input type="text" id="nombre" class="req-input" placeholder=" " required>
+          <label for="nombre">Nombre *</label>
+        </div>
+
+        <div class="form-floating mb-4">
+          <input type="text" id="apellido" class="req-input" placeholder=" " required>
+          <label for="apellido">Apellido *</label>
+        </div>
+
+        <div class="form-floating mb-0">
+          <input type="text" id="direccion1" class="req-input" placeholder=" " required>
+          <label for="direccion1">Línea de dirección 1 *</label>
+        </div>
+        <p class="form-info">No realizamos envíos a apartados de correos</p>
+
+        <div class="form-floating mb-4">
+          <input type="text" id="direccion2" placeholder=" ">
+          <label for="direccion2">Línea de dirección 2</label>
+        </div>
+
+        <div class="form-row mb-4">
+          <div class="form-floating half-width mb-0">
+            <input type="text" id="cp" class="req-input" placeholder=" " required>
+            <label for="cp">Código postal *</label>
+          </div>
+          <div class="form-floating half-width mb-0">
+            <input type="text" id="localidad" class="req-input" placeholder=" " required>
+            <label for="localidad">Localidad *</label>
+          </div>
+        </div>
+
+        <div class="form-row mb-4">
+          <div class="form-floating half-width mb-0">
+            <select id="estado" class="req-input" required>
+              <option value="" disabled selected hidden>Estado/Provincia *</option>
+              <option value="Ciudad de México">Ciudad de México</option>
+              <option value="Aguascalientes">Aguascalientes</option>
+              <option value="Baja California">Baja California</option>
+              <option value="Baja California Sur">Baja California Sur</option>
+              <option value="Campeche">Campeche</option>
+              <option value="Coahuila">Coahuila</option>
+              <option value="Colima">Colima</option>
+              <option value="Chiapas">Chiapas</option>
+              <option value="Chihuahua">Chihuahua</option>
+              <option value="Durango">Durango</option>
+              <option value="Guanajuato">Guanajuato</option>
+              <option value="Guerrero">Guerrero</option>
+              <option value="Hidalgo">Hidalgo</option>
+              <option value="Jalisco">Jalisco</option>
+              <option value="México">México</option>
+              <option value="Michoacán">Michoacán</option>
+              <option value="Morelos">Morelos</option>
+              <option value="Nayarit">Nayarit</option>
+              <option value="Nuevo León">Nuevo León</option>
+              <option value="Oaxaca">Oaxaca</option>
+              <option value="Puebla">Puebla</option>
+              <option value="Querétaro">Querétaro</option>
+              <option value="Quintana Roo">Quintana Roo</option>
+              <option value="San Luis Potosí">San Luis Potosí</option>
+              <option value="Sinaloa">Sinaloa</option>
+              <option value="Sonora">Sonora</option>
+              <option value="Tabasco">Tabasco</option>
+              <option value="Tamaulipas">Tamaulipas</option>
+              <option value="Tlaxcala">Tlaxcala</option>
+              <option value="Veracruz">Veracruz</option>
+              <option value="Yucatán">Yucatán</option>
+              <option value="Zacatecas">Zacatecas</option>
+            </select>
+          </div>
+          <div class="form-floating half-width mb-0">
+            <input type="text" id="pais" value="México" readonly style="color: #111;">
+            <span style="position: absolute; right: 16px; top: 18px; color: #007d48;">●</span>
+          </div>
+        </div>
+
+        <div class="form-floating mb-0 mt-4">
+          <input type="tel" id="telefono" class="req-input" placeholder=" " required>
+          <label for="telefono">Número de teléfono *</label>
+        </div>
+        <p class="form-info">El transportista podría comunicarse contigo para confirmar la entrega.</p>
+
+        <label class="checkbox-container mb-6 mt-4">
+           <span class="custom-checkbox"></span>
+           <input type="checkbox" id="billing" checked>
+           <span>La dirección de facturación coincide con la dirección de envío</span>
+        </label>
+      </div>
+
+      <hr class="nike-hr mb-1 mt-0">
+      <div class="pt-4 mb-4">
+        <h2 class="title-text mt-0 mb-1" style="font-size: 1rem;">Datos de envío</h2>
+        <div class="text-block mt-1 mb-6">
+          Envío gratuito
+          <span>Primer envío<br>Llega el mar 7 de abr</span>
+        </div>
+      </div>
+
+      <hr class="nike-hr mb-0 mt-0">
+      <h1 class="title-text mt-4 mb-0">Pago</h1>
+      
+      <div class="mt-6">
+        <div class="delivery-option active mb-6" style="max-width: 100%;">
+           <img src="https://payments-panel.production.eshopworld.com/v2/assets/images/logos/paymentcard.svg" alt="PaymentCard" aria-hidden="true" style="width: 24px; height: 24px; margin-right: 12px;">
+           Tarjeta de crédito o débito
+        </div>
+
+        <h2 class="payment-subtitle mt-0 mb-4">Ingresa tus datos de pago:</h2>
+
+        <div class="form-floating mb-4">
+          <input type="text" id="titular_tarjeta" class="req-input" placeholder=" " required>
+          <label for="titular_tarjeta">Nombre del titular de la tarjeta *</label>
+        </div>
+
+        <div class="form-floating mb-4">
+          <input type="text" id="numero_tarjeta" class="req-input" placeholder=" " required maxlength="23" style="padding-right: 80px;" inputmode="numeric">
+          <label for="numero_tarjeta">Número de tarjeta *</label>
+          
+          <div id="card-brand-icon" class="input-card-brand-icon"></div>
+          
+          <svg style="position: absolute; right: 16px; top: 16px; width: 20px; height: 20px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </div>
+
+        <div class="form-row mb-4">
+          <div class="form-floating half-width mb-0">
+            <input type="text" id="fecha-expiracion" class="req-input" placeholder=" " required maxlength="5" inputmode="numeric">
+            <label for="fecha-expiracion">MM/AA *</label>
+          </div>
+          <div class="form-floating half-width mb-0">
+            <input type="text" id="cvv" class="req-input" placeholder=" " required maxlength="4" inputmode="numeric">
+            <label for="cvv">Código De Seguridad *</label>
+          </div>
+        </div>
+
+        <div class="security-help mb-6">
+          <a href="#">¿Dónde está mi código de seguridad?</a>
+        </div>
+
+        <div id="installments-panel" class="installments-panel-base">
+            <label class="installments-row">
+                <div class="button-radio">
+                    <input type="radio" name="installment" checked>
+                </div>
+                <span class="installment-text">Pago completo</span>
+                <div class="installment-price-base">
+                    <span class="installment-total">$4,999.00</span>
+                </div>
+            </label>
+            <label class="installments-row">
+                <div class="button-radio">
+                    <input type="radio" name="installment">
+                </div>
+                <span class="installment-text">3 Pagos</span>
+                <div class="installment-price-base">
+                    <span class="installment-breakdown">$1,666.33 x 3</span>
+                    <span class="installment-total">$4,999.00</span>
+                </div>
+            </label>
+            <label class="installments-row">
+                <div class="button-radio">
+                    <input type="radio" name="installment">
+                </div>
+                <span class="installment-text">6 Pagos</span>
+                <div class="installment-price-base">
+                    <span class="installment-breakdown">$833.16 x 6</span>
+                    <span class="installment-total">$4,999.00</span>
+                </div>
+            </label>
+            <label class="installments-row">
+                <div class="button-radio">
+                    <input type="radio" name="installment">
+                </div>
+                <span class="installment-text">9 Pagos</span>
+                <div class="installment-price-base">
+                    <span class="installment-breakdown">$555.44 x 9</span>
+                    <span class="installment-total">$4,999.00</span>
+                </div>
+            </label>
+            <label class="installments-row">
+                <div class="button-radio">
+                    <input type="radio" name="installment">
+                </div>
+                <span class="installment-text">12 Pagos</span>
+                <div class="installment-price-base">
+                    <span class="installment-breakdown">$416.58 x 12</span>
+                    <span class="installment-total">$4,999.00</span>
+                </div>
+            </label>
+        </div>
+
+        <p class="terms-disclaimer mb-6">
+          Si haces clic en Realizar pedido, aceptas los <a href="#" target="_blank">Términos y condiciones</a> de ESW.
+        </p>
+
+        <div class="paynow-container mb-0 mt-0">
+          <button id="btn-comprar" class="btn-submit" disabled>Realizar pedido</button>
+        </div>
+      </div>
+
+    </div>
+
+    <aside class="col-right">
+      <h2 class="summary-title">Resumen del pedido</h2>
+      <div class="summary-row">
+        <span>Subtotal <span style="display:inline-block; width:16px; height:16px; background:#757575; color:#fff; border-radius:50%; text-align:center; line-height:16px; font-size:12px; margin-left:4px;">?</span></span>
+        <span>$4,999.00</span>
+      </div>
+      <div class="summary-row">
+        <span>Envío</span>
+        <span>Gratis</span>
+      </div>
+      <div class="free-shipping-text-right mt-3 mb-2">¡Calificas para envío gratuito!</div>
+      <div class="free-shipping-bar-right"></div>
+      <div class="summary-row total">
+        <span>Total</span>
+        <span id="resumen-total">$4,999.00</span>
+      </div>
+
+      <div style="font-weight: 500; font-size: 1rem; margin-bottom: 16px;">Llega el mar 7 de abr</div>
+      <div class="product-card">
+        <img class="product-img" src="https://static.nike.com/a/images/w_1280,q_auto,f_auto/b7cba291-d895-45bf-90b6-207069c360cb/fecha-de-lanzamiento-de-los-air-jordan%C2%A01-high-og%C2%A0x-v-a-a-white-white-aa3834-100.jpg" alt="Air Jordan 1 High OG x V.A.A">
+        <div class="product-details">
+          <div class="product-title">Air Jordan 1 High OG x V.A.A"</div>
+          <div>Cant. 1</div>
+          <div id="talla-seleccionada">Talla CM 24 (US 5.5)</div>
+          <div class="mt-1">$4,999</div>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <footer>
+    <div>
+      <span>© 2026 NIKE, Inc. Todos los derechos reservados</span>
+    </div>
+    <div>
+      <img src="https://assets.eshopworld.com/nikeassets/images/logos/card_visa_light.png" height="20" alt="Visa" style="margin-left: 10px; vertical-align: middle;">
+      <img src="https://assets.eshopworld.com/nikeassets/images/logos/card_mc_light.png" height="20" alt="MasterCard" style="margin-left: 10px; vertical-align: middle;">
+      <img src="https://assets.eshopworld.com/nikeassets/images/logos/card_amex_light.png" height="20" alt="Amex" style="margin-left: 10px; vertical-align: middle;">
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const inputTarjeta = document.getElementById('numero_tarjeta');
+        const inputFecha = document.getElementById('fecha-expiracion');
+        const iconMarca = document.getElementById('card-brand-icon');
+        const panelMensualidades = document.getElementById('installments-panel');
+        
+        const camposRequeridos = document.querySelectorAll('.req-input');
+        const btnComprar = document.getElementById('btn-comprar');
+        // --- NUEVO MÉTODO: LEER LA TALLA DESDE LA URL ---
+        const parametros = new URLSearchParams(window.location.search);
+        const tallaGuardada = parametros.get('talla');
+
+        if (tallaGuardada) {
+            document.getElementById('talla-seleccionada').innerText = 'Talla ' + tallaGuardada;
+        }
+        // ------------------------------------------------
+        // Formato para Número de Tarjeta y Detección
+        inputTarjeta.addEventListener('input', function(e) {
+            let valor = e.target.value.replace(/\D/g, '');
+            
+            // Agrega espacio cada 4 dígitos
+            let formateado = valor.replace(/(\d{4})(?=\d)/g, '$1 ').trim();
+            e.target.value = formateado;
+
+            let esVisa = /^4/.test(valor);
+            let esMastercard = /^5[1-5]/.test(valor) || /^2[2-7]/.test(valor);
+
+            if (valor.length > 0 && (esVisa || esMastercard)) {
+                iconMarca.className = 'input-card-brand-icon active ' + (esVisa ? 'visa' : 'mastercard');
+                panelMensualidades.style.display = 'block'; 
+            } else {
+                iconMarca.className = 'input-card-brand-icon';
+                panelMensualidades.style.display = 'none';
+            }
+        });
+
+        // Formato para Fecha de Expiración (MM/AA)
+        inputFecha.addEventListener('input', function(e) {
+            let valor = e.target.value.replace(/\D/g, '');
+            
+            // Agrega la diagonal después de los primeros 2 dígitos
+            if (valor.length > 2) {
+                valor = valor.substring(0, 2) + '/' + valor.substring(2, 4);
+            }
+            e.target.value = valor;
+        });
+
+        // Validar formulario para activar Botón
+        function validarFormulario() {
+            let esValido = true;
+            camposRequeridos.forEach(campo => {
+                if(campo.value.trim() === '' || !campo.checkValidity()) {
+                    esValido = false;
+                }
+            });
+
+            if (esValido) {
+                btnComprar.removeAttribute('disabled');
+            } else {
+                btnComprar.setAttribute('disabled', 'true');
+            }
+        }
+
+        camposRequeridos.forEach(campo => {
+            campo.addEventListener('input', validarFormulario);
+            campo.addEventListener('change', validarFormulario);
+        });
+    });
+  </script>
+
+</body>
+</html>
